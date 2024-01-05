@@ -1,9 +1,4 @@
 ﻿using SocialNetwork.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.DAL.Repositories
 {
@@ -29,7 +24,6 @@ namespace SocialNetwork.DAL.Repositories
         {
             return Execute("delete from messages where id = :id", new { id = messageId });
         }
-
     }
 
     public interface IMessageRepository

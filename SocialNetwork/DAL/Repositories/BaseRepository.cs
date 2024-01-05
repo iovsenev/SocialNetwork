@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dapper;
 
 namespace SocialNetwork.DAL.Repositories
@@ -40,7 +35,7 @@ namespace SocialNetwork.DAL.Repositories
 
         private IDbConnection CreateConnection()
         {
-            return new SQLiteConnection("Data Source = DAL/DB/social_network_bd.db; Version = 3");
+            return new SQLiteConnection("Data Source = D:\\Работа и обучение\\beckend обучение\\Ulearn\\WindowsForm\\SocialNetwork\\SocialNetwork\\DAL\\DB\\social_network_bd.db; Version = 3");
         }
     }
 }

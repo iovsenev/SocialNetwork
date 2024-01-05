@@ -1,54 +1,51 @@
-﻿using SocialNetwork.BLL.Models;
-using SocialNetwork.BLL.Services;
-using System.Runtime.CompilerServices;
+﻿using SocialNetwork.BLL.Services;
+using SocialNetwork.PLL.View;
 
 namespace SocialNetwork
 {
-    internal class Program
+    class Program
     {
-        static UserService userService = new UserService();
+        static MessageService _messageService;
+        static UserService _userService;
+        static FriendService _friendService;
+
+        public static MainView mainView;
+        public static AuthenticationView authenticationView;
+        public static MessageSendingView messageSendingView;
+        public static RegistrationView registrationView;
+        public static UserDataUpdateView userDataUpdateView;
+        public static UserIncomingMessageView userIncomingMessageView;
+        public static UserInfoView userInfoView;
+        public static UserMenuView userMenuView;
+        public static UserOutcomingMessageView userOutcomingMessageView;
+        public static FriendMenuView friendMenuView;
+        public static FriendListView friendListView;
+        public static FriendAddView friendAddView;
+
         static void Main(string[] args)
         {
+            _messageService = new MessageService();
+            _userService = new UserService();
+            _friendService = new FriendService();
+
+            mainView = new MainView();
+            authenticationView = new AuthenticationView(_userService);
+            registrationView = new RegistrationView(_userService);
+            userMenuView = new UserMenuView(_userService);
+            userInfoView = new UserInfoView();
+            userDataUpdateView = new UserDataUpdateView(_userService);
+            messageSendingView = new MessageSendingView(_messageService);
+            userIncomingMessageView = new UserIncomingMessageView();
+            userOutcomingMessageView = new UserOutcomingMessageView();
+            friendMenuView = new FriendMenuView();
+            friendListView = new FriendListView();
+            friendAddView = new FriendAddView(_friendService);
+
             while (true)
             {
-                Console.WriteLine("Добро пожаловать в социальную сеть");
-                Console.WriteLine("Для регистрации введите");
-
-                Console.Write("Имя пользователя: ");
-                var firstName = Console.ReadLine();
-
-                Console.Write("Фамилия пользователя: ");
-                var lastName = Console.ReadLine();
-
-                Console.Write("Email пользователя: ");
-                var email = Console.ReadLine();
-
-                Console.Write("Пароль пользователя: ");
-                var password = Console.ReadLine();
-
-                var userRegistrationData = new UserRegistrationData()
-                {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    Email = email,
-                    Password = password
-                };
-
-                try
-                {
-                    userService.Register(userRegistrationData);
-                    Console.WriteLine("Регистрация прошла успешно.");
-                }
-                catch (ArgumentNullException)
-                {
-                    Console.WriteLine("Введите корректные данные.");
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Произошла ошибка регистрации.");
-                }
-                Console.ReadLine();
+                mainView.Show();
             }
         }
     }
 }
+
