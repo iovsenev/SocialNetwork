@@ -11,13 +11,16 @@ namespace SocialNetwork
 
         public static MainView mainView;
         public static AuthenticationView authenticationView;
-        public static MessageSendingView messageSendingView;
         public static RegistrationView registrationView;
-        public static UserDataUpdateView userDataUpdateView;
-        public static UserIncomingMessageView userIncomingMessageView;
-        public static UserInfoView userInfoView;
+
         public static UserMenuView userMenuView;
+        public static UserInfoView userInfoView;
+        public static UserDataUpdateView userDataUpdateView;
+
+        public static MessageSendingView messageSendingView;
+        public static UserIncomingMessageView userIncomingMessageView;
         public static UserOutcomingMessageView userOutcomingMessageView;
+
         public static FriendMenuView friendMenuView;
         public static FriendListView friendListView;
         public static FriendAddView friendAddView;
@@ -31,12 +34,15 @@ namespace SocialNetwork
             mainView = new MainView();
             authenticationView = new AuthenticationView(_userService);
             registrationView = new RegistrationView(_userService);
+
             userMenuView = new UserMenuView(_userService);
             userInfoView = new UserInfoView();
             userDataUpdateView = new UserDataUpdateView(_userService);
+
             messageSendingView = new MessageSendingView(_messageService);
             userIncomingMessageView = new UserIncomingMessageView();
             userOutcomingMessageView = new UserOutcomingMessageView();
+
             friendMenuView = new FriendMenuView();
             friendListView = new FriendListView();
             friendAddView = new FriendAddView(_friendService);
