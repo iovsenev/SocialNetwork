@@ -9,15 +9,19 @@ namespace SocialNetwork.BLL.Services
     public class UserService
     {
         IUserRepository _userRepository;
-        MessageService _messageService;
-        FriendService _friendService;
+        IMessageRepository _messageRepository;
+        IFriendRepository _friendRepository;
 
-        public UserService()
+        public UserService(
+            IUserRepository userRepository, 
+            IMessageRepository messageRepository,
+            IFriendRepository friendRepository)
         {
-            _userRepository = new UserRepository();
-            _messageService = new MessageService();
-            _friendService = new FriendService();
+            _userRepository = userRepository;
+            _messageRepository = messageRepository;
+            _friendRepository = friendRepository;
         }
+
         public void Register(UserRegistrationData userRegistrationData)
         {
             if (string.IsNullOrEmpty(userRegistrationData.FirstName))
@@ -92,9 +96,9 @@ namespace SocialNetwork.BLL.Services
 
         private User ConstructUserModel(UserEntity userEntity)
         {
-            var incomingmessage = _messageService.GetIncommingMessageByUserId(userEntity.id);
-            var outcomingMessage = _messageService.GetOutcommingMessageByUserId(userEntity.id);
-            var friendList = _friendService.GetFriends(userEntity.id);
+            var incomingmessage = _messageRepository.FindByRecipientId(userEntity.id);
+            var outcomingMessage = _messageRepository.FindBySenderId(userEntity.id);
+            var friendList = _friendRepository.FindAllByUserId(userEntity.id);
             return new User(userEntity.id,
                           userEntity.firstname,
                           userEntity.lastname,

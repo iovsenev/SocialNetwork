@@ -63,10 +63,10 @@ namespace SocialNetwork.PLL.View
                         Program.messageSendingView.Show(user);
                         break;
                     case 5:
-                        Program.userIncomingMessageView.Show(user.IncomingMessages);
+                        Program.userIncomingMessageView.Show(user);
                         break;
                     case 6:
-                        Program.userOutcomingMessageView.Show(user.OutgoingMessages);
+                        Program.userOutcomingMessageView.Show(user);
                         break;
                 }
 
