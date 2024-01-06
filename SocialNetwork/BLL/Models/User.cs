@@ -1,4 +1,6 @@
-﻿namespace SocialNetwork.BLL.Models
+﻿using SocialNetwork.DAL.Entities;
+
+namespace SocialNetwork.BLL.Models
 {
     public class User
     {
@@ -11,9 +13,9 @@
         public string FavoriteMovie { get; set; }
         public string FavoriteBook { get; set; }
 
-        public IEnumerable<Message> IncomingMessages { get; }
-        public IEnumerable<Message> OutgoingMessages { get; }
-        public IEnumerable<Friend> Friends { get; }
+        public IEnumerable<MessageEntity> IncomingMessages { get; }
+        public IEnumerable<MessageEntity> OutgoingMessages { get; }
+        public IEnumerable<FriendEntity> Friends { get; }
 
         public User(
             int id,
@@ -24,9 +26,9 @@
             string photo,
             string favoriteMovie,
             string favoriteBook,
-            IEnumerable<Message> incomingMessage,
-            IEnumerable<Message> outgoingMessage,
-            IEnumerable<Friend> friendList)
+            IEnumerable<MessageEntity> incomingMessage,
+            IEnumerable<MessageEntity> outgoingMessage,
+            IEnumerable<FriendEntity> friendList)
         {
             Id = id;
             FirstName = firstName;

@@ -10,10 +10,12 @@ namespace SocialNetwork.BLL.Services
         IFriendRepository _friendRepository;
         IUserRepository _userRepository;
 
-        public FriendService()
+        public FriendService(
+            IUserRepository userRepository, 
+            IFriendRepository friendRepository)
         {
-            _friendRepository = new FriendRepository();
-            _userRepository = new UserRepository();
+            _userRepository = userRepository;
+            _friendRepository = friendRepository;
         }
 
         public IEnumerable<Friend> GetFriends(int userId)

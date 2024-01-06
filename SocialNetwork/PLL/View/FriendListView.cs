@@ -1,13 +1,21 @@
 ﻿using SocialNetwork.BLL.Models;
+using SocialNetwork.BLL.Services;
 using SocialNetwork.PLL.Helpers;
 
 namespace SocialNetwork.PLL.View
 {
     public class FriendListView
     {
+        FriendService _friendService;
+
+        public FriendListView(FriendService friendService)
+        {
+            _friendService = friendService;
+        }
+
         public void Show(User user)
         {
-            var friendList = user.Friends.ToList();
+            var friendList = _friendService.GetFriends(user.Id).ToList();
 
             if (friendList.Count > 0)
             {

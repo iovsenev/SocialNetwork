@@ -1,10 +1,15 @@
 ﻿using SocialNetwork.BLL.Services;
+using SocialNetwork.DAL.Repositories;
 using SocialNetwork.PLL.View;
 
 namespace SocialNetwork
 {
     class Program
     {
+        static IUserRepository _userRepository;
+        static IMessageRepository _messageRepository;
+        static IFriendRepository _friendRepository;
+
         static MessageService _messageService;
         static UserService _userService;
         static FriendService _friendService;
@@ -27,9 +32,13 @@ namespace SocialNetwork
 
         static void Main(string[] args)
         {
-            _messageService = new MessageService();
-            _userService = new UserService();
-            _friendService = new FriendService();
+            _userRepository = new UserRepository();
+            _messageRepository = new MessageRepository();
+            _friendRepository = new FriendRepository();
+
+            _userService = new UserService(_userRepository, _messageRepository, _friendRepository);
+            _messageService = new MessageService(_userRepository, _messageRepository);
+            _friendService = new FriendService(_userRepository, _friendRepository);
 
             mainView = new MainView();
             authenticationView = new AuthenticationView(_userService);
@@ -40,11 +49,11 @@ namespace SocialNetwork
             userDataUpdateView = new UserDataUpdateView(_userService);
 
             messageSendingView = new MessageSendingView(_messageService);
-            userIncomingMessageView = new UserIncomingMessageView();
-            userOutcomingMessageView = new UserOutcomingMessageView();
+            userIncomingMessageView = new UserIncomingMessageView(_messageService);
+            userOutcomingMessageView = new UserOutcomingMessageView(_messageService);
 
             friendMenuView = new FriendMenuView();
-            friendListView = new FriendListView();
+            friendListView = new FriendListView(_friendService);
             friendAddView = new FriendAddView(_friendService);
 
             while (true)

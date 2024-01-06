@@ -7,13 +7,15 @@ namespace SocialNetwork.BLL.Services
 {
     public class MessageService
     {
-        IMessageRepository _messageRepository;
         IUserRepository _userRepository;
+        IMessageRepository _messageRepository;
 
-        public MessageService()
+        public MessageService(
+            IUserRepository userRepository,
+            IMessageRepository messageRepository)
         {
-            _messageRepository = new MessageRepository();
-            _userRepository = new UserRepository();
+            _userRepository = userRepository;
+            _messageRepository = messageRepository;
         }
 
         public IEnumerable<Message> GetIncommingMessageByUserId(int recipientId)
