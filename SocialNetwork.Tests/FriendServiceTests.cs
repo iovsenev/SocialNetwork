@@ -1,3 +1,8 @@
+using Moq;
+using SocialNetwork.BLL.Exceptions;
+using SocialNetwork.BLL.Services;
+using SocialNetwork.DAL.Repositories;
+
 namespace SocialNetwork.Tests
 {
     [TestFixture]
